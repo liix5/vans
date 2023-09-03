@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+  .back{
+    
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0.46) 100%), url('./assets/home-img.png'), lightgray 0px -65.191px / 100% 178.109% ;
+    background-position: center;
+    
+    overflow: hidden;
+  } 
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
