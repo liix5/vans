@@ -2,8 +2,8 @@ import photo from './assets/about-img.png'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
 function About() {
-  return <div className=' flex flex-col justify-center items-center'>
-    <img className=' max-h-[70vh] w-screen max-w-4xl rounded-sm`  object-cover' src={photo} alt="" />
+  return <div className=' md:m-8 md:flex-row flex flex-col justify-center items-center'>
+    <img className=' md:rounded md:overflow-clip md:h-[400px] md:w-6/12 max-w-[600px] max-h-[70vh] w-screen  rounded-sm`  object-cover' src={photo} alt="" />
 
     <div className=' flex flex-col justify-center max-w-4xl m-8 font-inter text-[#161616] gap-6'>
     <h2 className=' leading-9 font-bold text-3xl'>Don’t squeeze in a sedan when you could relax in a van.</h2>

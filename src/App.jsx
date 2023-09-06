@@ -18,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-     
+    
     
      <nav className=' shadow-sm flex justify-between px-5 py-10 bg-[#FFF7ED] items-center'>
       <Link onClick={()=> setSelctedRoute('home')} to="/"><img className=' w-32' src={vanlife} alt="logo"  /></Link>
@@ -43,12 +43,13 @@ function App() {
     // footer
     }
 
-    <div className=" absloute  h-20 bg-[#252525] flex justify-center items-center text-[#AAAAAA] font-medium text-sm">
+    <div className=" bottom-0 absloute  h-20 bg-[#252525] flex justify-center items-center text-[#AAAAAA] font-medium text-sm">
     <p>
     Ⓒ 2022 #VANLIFE by Layan
     </p>
 
   </div>
+  
   </BrowserRouter>
   
   )

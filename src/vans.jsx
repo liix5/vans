@@ -14,9 +14,9 @@ function Vans(){
   
 
   const vanElemnt = vansData.map((van)=>{
-      return  <Link className="w-full" to={`/vans/${van.id}`}>
+      return  <Link className=" h-fit" to={`/vans/${van.id}`}>
         <div className=' cursor-pointer h-72 w-48' key={van.id}>
-      <img className=' rounded w-52' src={van.imageUrl
+      <img className=' mb-2 rounded w-52' src={van.imageUrl
       } alt={van.name} />
       <div className=' flex flex-col'>
         <div className=' flex justify-between font-semibold'>
@@ -44,7 +44,7 @@ function Vans(){
       <button className='pl-3 underline text-[#4D4D4D]'>Clear filters</button>
      </div>
     </div>
-    <div className=' grid gap-8 grid-cols-2  md:grid-cols-4 lg:grid-cols-5 py-6  px-9'>
+    <div className=' gap-8 flex justify-center items-center py-6 flex-wrap  px-8'>
       {vanElemnt}
     </div>
     
