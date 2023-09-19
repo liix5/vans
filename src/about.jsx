@@ -12,7 +12,7 @@ function About() {
     (Hitch costs extra 😉)</p>
     <p className=' pt-3 font-medium leading-6'>Our team is full of vanlife enthusiasts who know firsthand the magic of touring the world on 4 wheels.</p>
     </div>
-    <div className='p-9  text-[#161616] font-bold h-48 bg-[#FFCC8D] rounded-md text-xl max-w-2xl'>
+    <div className='flex px-9 flex-col justify-center  text-[#161616] font-bold h-48 bg-[#FFCC8D] rounded-md  text-xl max-w-2xl'>
       <p>Your destination is waiting.</p>
       <p className=' pt-1'>Your van is ready.</p>
 

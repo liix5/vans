@@ -15,10 +15,13 @@ function App() {
   
  
   const [selctedRoute, setSelctedRoute]= useState('home')
+  
+  
 
   return (
     <BrowserRouter>
     
+      
     
      <nav className=' shadow-sm flex justify-between px-5 py-10 bg-[#FFF7ED] items-center'>
       <Link onClick={()=> setSelctedRoute('home')} to="/"><img className=' w-32' src={vanlife} alt="logo"  /></Link>
@@ -32,7 +35,7 @@ function App() {
     </nav>
     
     <Routes>
-      
+    
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/vans" element={<Vans />} />
@@ -40,7 +43,7 @@ function App() {
     </Routes>
     
     {
-    // footer
+   
     }
 
     <div className=" bottom-0 absloute  h-20 bg-[#252525] flex justify-center items-center text-[#AAAAAA] font-medium text-sm">
