@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import './server'
-import { Link } from 'react-router-dom'
+import '/src/server.jsx'
+import { Link, useParams } from 'react-router-dom'
 
 function Vans(){
   const [vansData, setVansData] = useState([])
-
+ 
   useEffect(() => {
     fetch("/api/vans")
         .then(res => res.json())
@@ -14,7 +14,7 @@ function Vans(){
   
 
   const vanElemnt = vansData.map((van)=>{
-      return  <Link className=" h-fit" to={`/vans/${van.id}`}>
+      return  <Link key={van.id} className=" h-fit" to={`/vans/${van.id}`}>
         <div className=' cursor-pointer h-72 w-48' key={van.id}>
       <img className=' mb-2 rounded w-52' src={van.imageUrl
       } alt={van.name} />
@@ -33,7 +33,7 @@ function Vans(){
     
   })
 
-  return <div className=' font-inter'>
+  return <div className=' font-inter bg-[#FFF7ED]'>
     <div className=' flex flex-col gap-4 p-5'>
      <h1 className=' text-3xl font-bold'>Explore our van options</h1>
      <div className=' flex gap-4'>

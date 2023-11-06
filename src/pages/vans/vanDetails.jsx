@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation, useParams } from "react-router-dom"
-import arrow from './assets/arrow-1.svg'
+import arrow from '/src/assets/arrow-1.svg'
 
 function vanDetails(){
   const pram = useParams()
@@ -9,16 +9,20 @@ function vanDetails(){
   
   
   useEffect(() => {
+    console.log(pram)
     fetch(`/api/vans/${pram.id}`)
         .then(res => res.json())
         .then(data => setVan(data.vans))
   }, [pram.id])
 
   return (
-  <div className=" p-7 ">
+  <div className=" p-7 bg-[#FFF7ED]">
     {van? (<>
      
-    <Link className=" pb-6 w-fit flex items-center cursor-pointer" to={'/vans'}> <img src={arrow} alt="" />
+    <Link className=" pb-6 w-fit flex items-center cursor-pointer"
+     to={'..'}
+     relative="path"
+     > <img src={arrow} alt="" />
       <button className='pl-3 underline text-[#4D4D4D]'>Back to all vans</button></Link>
       
 
