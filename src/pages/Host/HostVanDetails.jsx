@@ -11,7 +11,7 @@ export default function VansDetails(){
   useEffect(() => {
     console.log(param)
 
-    fetch(`/api/host/vans/${param.idof}`)
+    fetch(`/api/host/vans/${param.id}`)
         .then(res => res.json())
         .then(data => setCurrVan(data.vans[0]))
   }, [])

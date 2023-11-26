@@ -4,6 +4,7 @@ import arrow from '/src/assets/arrow-1.svg'
 
 function vanDetails(){
   const pram = useParams()
+  const location = useLocation()
   const [van, setVan] = useState(null)
   
   
@@ -15,15 +16,18 @@ function vanDetails(){
         .then(data => setVan(data.vans))
   }, [pram.id])
 
+  const search = location.state?.search || ''
+  const type = location.state?.type || 'all'
+  
   return (
   <div className=" p-7 bg-[#FFF7ED]">
     {van? (<>
      
     <Link className=" pb-6 w-fit flex items-center cursor-pointer"
-     to={'..'}
+     to={`..?${search}`}
      relative="path"
      > <img src={arrow} alt="" />
-      <button className='pl-3 underline text-[#4D4D4D]'>Back to all vans</button></Link>
+      <button className='pl-3 underline text-[#4D4D4D]'>{`Back to ${type} vans`}</button></Link>
       
 
     <div className="  md:flex-row font-inter gap-7  flex flex-col justify-center items-center">

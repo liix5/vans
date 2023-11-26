@@ -17,7 +17,7 @@ export default function Vans(){
   let vans = van.map((van)=>{
    return(
     
-    <Link to={`/host/vans/${van.id}`}>
+    <Link to={van.id}>
         <div className=" hover:shadow-lg flex items-center px-7 md:flex-col rounded-md bg-white gap-5 md:h-96 h-28">
           <img className="  md:mt-6 md:w-64 rounded w-16" src={van.imageUrl} alt={van.name} />
           <div className=" md:items-center md:justify-center md:flex flex-col">

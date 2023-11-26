@@ -1,20 +1,58 @@
 import { useEffect, useState } from 'react'
 import '/src/server.jsx'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLoaderData, useParams, useSearchParams } from 'react-router-dom'
+import { getVans } from '../../api'
+
+// ? why is using a loaderf is better than doing it the normal way by useEffect? 
+//*  Don't need to worry about handling loading state in the component
+//* Don't need to have lengthy/confusing useEffect code in ourcomponent
+//* Don't need to handle error state in the component
+
+
+export function loader(){
+  //*  i can make this an async func and fetch the data here (i dont need to make the call as a seprate component)
+  return getVans()
+}
 
 function Vans(){
-  const [vansData, setVansData] = useState([])
  
-  useEffect(() => {
-    fetch("/api/vans")
-        .then(res => res.json())
-        .then(data => setVansData(data.vans))
-  }, [])
+  const [searchParam, setSearchParam]=useSearchParams()
+  const [error, setError] = useState(null)
+  const vansData = useLoaderData()
+
+
+ 
 
   
 
-  const vanElemnt = vansData.map((van)=>{
-      return  <Link key={van.id} className=" h-fit" to={`/vans/${van.id}`}>
+  const typeFilter = searchParam.get('type')
+
+
+
+  const displyedVans = typeFilter?
+  vansData.filter(van=> van.type == typeFilter):
+  vansData
+  
+  // * ما نحتاجة لكنة يتاكد انه اذا اضفنا فلتر ما يحذف الفلتر الي كان موجود قبلة اذا كان فية
+  function handleFilterChange(key, value) {
+    setSearchParam(prevParams => {
+        if (value === null) {
+            prevParams.delete(key)
+        } else {
+            prevParams.set(key, value)
+        }
+        return prevParams
+    })
+}
+
+  const butStyle='flex justify-center items-center  text-[#4D4D4D] w-28 rounded-md hover:text-[#FFF7ED]   font-medium h-9'
+  
+
+  const vanElemnt = displyedVans.map((van)=>{
+        return <Link key={van.id} className=" h-fit"
+      //* to save the filtring data even if we move to the van details page 
+       to={van.id} state={{search: searchParam.toString(),
+       type: typeFilter}}>
         <div className=' cursor-pointer h-72 w-48' key={van.id}>
       <img className=' mb-2 rounded w-52' src={van.imageUrl
       } alt={van.name} />
@@ -33,19 +71,31 @@ function Vans(){
     
   })
 
-  return <div className=' font-inter bg-[#FFF7ED]'>
+  
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>
+  }
+
+  return <div className=' min-h-[77vh] font-inter bg-[#FFF7ED]'>
     <div className=' flex flex-col gap-4 p-5'>
      <h1 className=' text-3xl font-bold'>Explore our van options</h1>
      <div className=' flex gap-4'>
-      <button className=' flex justify-center items-center bg-[#FFEAD0] text-[#4D4D4D] w-28 rounded-md  font-medium h-9'>Simple</button>
-      <button className=' flex justify-center items-center bg-[#FFEAD0] text-[#4D4D4D] w-28 rounded-md  font-medium h-9'>Luxury</button>
-      <button className=' flex justify-center items-center bg-[#FFEAD0] text-[#4D4D4D] w-28 rounded-md  font-medium h-9'>Rugged</button>
 
-      <button className='pl-3 underline text-[#4D4D4D]'>Clear filters</button>
+      <button onClick={()=> handleFilterChange('type', 'simple')} className= { typeFilter=='simple'? butStyle+' bg-[#E17654] text-[#FFF7ED]': butStyle+' hover:bg-[#E17654] bg-[#FFEAD0]'}>Simple</button>
+
+      <button onClick={()=> handleFilterChange('type','luxury')} className={ typeFilter=='luxury'? butStyle+' bg-[#161616] text-[#FFF7ED]': butStyle+' hover:bg-[#161616] bg-[#FFEAD0]'}>Luxury</button>
+
+      <button onClick={()=> handleFilterChange('type', 'rugged')} className={ typeFilter=='rugged'? butStyle+' bg-[#115E59] text-[#FFF7ED]': butStyle+' hover:bg-[#115E59] bg-[#FFEAD0]'}>Rugged</button>
+
+      {typeFilter?
+      <button onClick={()=>  handleFilterChange('type', null)} className='pl-3 underline text-[#4D4D4D]'>Clear filters</button>
+      :null}
+      
      </div>
     </div>
     <div className=' gap-8 flex justify-center items-center py-6 flex-wrap  px-8'>
       {vanElemnt}
+      
     </div>
     
   </div>
