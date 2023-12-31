@@ -37,7 +37,7 @@ export default function Login() {
 
    
     return (
-        <div className=" font-inter min-h-[83vh] bg-[#FFF7ED] p-20">
+        <div className=" font-inter min-h-[83vh] bg-[#FFF7ED] md:px-20 px-5 py-20">
            <h1 className="text-center text-[#161616] font-bold text-3xl ">Log in to your account</h1>
            <p className="text-center  text-[#161616] font-medium mb-8">Hello just press log in no real authentication in this demo app </p>
            {message && <h3 className=" text-center text-red-600 m-3">{message}</h3>}
