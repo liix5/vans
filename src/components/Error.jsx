@@ -5,7 +5,9 @@ export default function error(){
 
 const error =useRouteError()
 console.log(error)
-  return <div className="h-[76vh] bg-[#FFF7ED]">
-    <h1 className=" font-inter  text-2xl p-8 text-orange-950">Error: {error.message} </h1>
+  return <div className="h-[83vh] p-8 bg-[#FFF7ED]">
+    <h1 className=" font-inter font-bold  text-2xl  text-orange-950">Error: {error.message} </h1>
+    <pre>{error.status} - {error.statusText}</pre>
+  
   </div>
 }

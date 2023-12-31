@@ -1,35 +1,31 @@
-import { useEffect, useState } from "react"
-import { Link, useLocation, useParams } from "react-router-dom"
+import { useEffect, useState,Suspense } from "react"
+import { Link,useLoaderData,defer,Await } from "react-router-dom"
 import arrow from '/src/assets/arrow-1.svg'
+import { getVan } from "../../api"
+import Loading from '/src/components/loading.jsx'
+
+export function loader({params}){
+  //*  i can make getVans an async func and fetch the data here (i dont need to make the call in a seprate component( the api one ))
+  
+  return defer({vans: getVan(params.id)}) 
+}
+
 
 function vanDetails(){
-  const pram = useParams()
-  const location = useLocation()
-  const [van, setVan] = useState(null)
   
-  
-  
-  useEffect(() => {
-    console.log(pram)
-    fetch(`/api/vans/${pram.id}`)
-        .then(res => res.json())
-        .then(data => setVan(data.vans))
-  }, [pram.id])
+  const vanPromise = useLoaderData()
 
   const search = location.state?.search || ''
   const type = location.state?.type || 'all'
-  
-  return (
-  <div className=" p-7 bg-[#FFF7ED]">
-    {van? (<>
-     
+
+  const renderVan=(van)=>{
+    return <>
     <Link className=" pb-6 w-fit flex items-center cursor-pointer"
      to={`..?${search}`}
      relative="path"
      > <img src={arrow} alt="" />
       <button className='pl-3 underline text-[#4D4D4D]'>{`Back to ${type} vans`}</button></Link>
       
-
     <div className="  md:flex-row font-inter gap-7  flex flex-col justify-center items-center">
       <img className=" lg:m-8 lg:w-5/12 md:w-1/2 rounded-md" src={van.imageUrl} alt="" />
 
@@ -40,10 +36,20 @@ function vanDetails(){
       <h1 className=" font-bold text-2xl ">{van.name}</h1>
       <p className=" font-bold">${van.price} <span className=' font-medium text-sm'>/ day</span></p>
       <p className=" font-medium">{van.description}</p>
-      <button className=" text-white rounded h-11 w-full bg-[#FF8C38]">Rent this van</button>
+      <button className=" active:bg-[#ec7f31] text-white rounded h-11 w-full bg-[#FF8C38]">Rent this van</button>
       </div>
-    </div> </>): <h2>Loading...</h2>}
-  </div> )
+    </div> 
+    </>  
+  }
+  
+  return (
+    <div className=" p-7 bg-[#FFF7ED] min-h-[84vh] ">
+      <Suspense fallback={<Loading/>}>
+        <Await resolve={vanPromise.vans}>
+          {renderVan}
+        </Await>
+      </Suspense>
+    </div> )
 }
 
 export default vanDetails

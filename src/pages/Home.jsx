@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 function Home(){
-  return <div className=" h-[80vh] font-inter m-0 p-0">
+  return <div className=" h-[83vh] font-inter m-0 p-0">
   <div 
    className=" bg-no-repeat h-[100%] flex justify-center items-center bg-cover back ">
 

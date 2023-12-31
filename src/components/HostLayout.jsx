@@ -3,8 +3,8 @@ import { Link, Outlet,NavLink } from "react-router-dom"
  
 
 export default function Host(){
-  return(<div className=" bg-[#FFF7ED] min-h-[77vh] ">
-    <div className="  font-inter text-[#4D4D4D] flex gap-7 py-8 px-6">
+  return(<div className=" bg-[#FFF7ED] min-h-[83vh] ">
+    <div className="  font-inter text-[#4D4D4D]  flex gap-7 py-8 px-6">
 
       <NavLink
        to={'.'}
